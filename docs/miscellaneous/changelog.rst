@@ -8,6 +8,16 @@ This page keeps a fairly detailed, human readable version
 of what has changed, and whats new for each version of the lib.
 
 
+v2.4.2
+------
+
+Bugs Fixed:
+~~~~~~~~~~~
+
+- Fixed bug that broke :func:`RaidClan.attacks`
+
+- Fixed caching of error API responses
+ 
 v2.4.1
 ------
 
