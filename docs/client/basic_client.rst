@@ -5,5 +5,7 @@ Basic Client Interface
 
 The following details all operations on the basic client instance.
 
+.. attributetable:: Client
+
 .. autoclass:: Client
     :members:
