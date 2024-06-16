@@ -11,6 +11,7 @@ import sys
 root_project = pathlib.Path(__file__).parents[1].resolve()
 sys.path.insert(0, root_project.as_posix())
 sys.path.append((root_project / "docs").as_posix())
+sys.path.append(os.path.abspath('extensions'))
 
 project = 'coc'
 copyright = '2022, mathsman5133'
