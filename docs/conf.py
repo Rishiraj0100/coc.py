@@ -42,5 +42,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_theme = "sphinx_rtd_theme"
 html_js_files = [
-    "copy.js"
+  'custom.js',
+  'settings.js',
+  'copy.js',
+  'sidebar.js'
 ]
