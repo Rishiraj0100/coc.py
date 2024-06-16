@@ -7,6 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 import pathlib
 import sys
+import os
+
 
 root_project = pathlib.Path(__file__).parents[1].resolve()
 sys.path.insert(0, root_project.as_posix())
