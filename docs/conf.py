@@ -24,17 +24,23 @@ release = '3.6.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
+    "builder",
     "sphinx.ext.duration",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.napoleon",
-    'attributetable'
+    "attributetable",
+    "resourcelinks"
 ]
 
 templates_path = ['_templates']
+html_static_path = ['_static']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "sphinx_rtd_theme"
+html_js_files = [
+    "copy.js"
+]
