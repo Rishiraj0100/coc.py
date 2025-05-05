@@ -18,7 +18,8 @@ sys.path.append(os.path.abspath('extensions'))
 project = 'coc'
 copyright = '2022, mathsman5133'
 author = 'mathsman5133'
-release = '3.6.0'
+release = '3.9.1'
+
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

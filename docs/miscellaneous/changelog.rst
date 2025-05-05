@@ -7,6 +7,123 @@ Changelog
 This page keeps a fairly detailed, human readable version
 of what has changed, and whats new for each version of the lib.
 
+v3.9.1
+------
+
+Changes:
+~~~~~~~~
+- Minimum Python version required was changed from `3.7` to `3.9` as `3.7` and `3.8` are end-of-life.
+
+Additions:
+~~~~~~~~~~
+- Added the achievement 'Supercharger'
+
+Bugs Fixed:
+~~~~~~~~~~~
+- Fixed a bug when installing coc.py that would cause not all dependencies being installed
+
+Removals:
+~~~~~~~~~
+- Removal of the `full_war_api` extension, as it is not longer maintained
+
+v3.9.0
+------
+
+Additions:
+~~~~~~~~~~
+- Added the new Metal Pants & Snake Bracelet equipment to :class:`coc.EQUIPMENT`
+- Added the new Troop Launcher Siege
+- Updated static data & enums for the February 2025 update
+- Changed from ujson to orjson for improved performance and future-proofing
+
+Bugs Fixed:
+~~~~~~~~~~~
+- Fixed a bug that would cause :meth:`coc.Client.get_members` to return an empty list
+
+v3.8.4
+------
+
+Bugs Fixed:
+~~~~~~~~~~~
+- Fixed a bug in army ids where "Super Hog Rider" was defined as "Super Hog"
+
+v3.8.3
+------
+
+Bugs Fixed:
+~~~~~~~~~~~
+- Fixed a bug in several war related endpoints that passed realtime twice to the http client.
+
+v3.8.2
+------
+
+Bugs Fixed:
+~~~~~~~~~~~
+- Fixed a bug with :func:`coc.Client.get_current_war` that caused it to not fetch the correct current CWL war
+
+v3.8.1
+------
+
+Bugs Fixed:
+~~~~~~~~~~~
+- Fixed a bug with `**kwargs` in :class:`coc.Client` functions that caused duplicated values
+
+v3.8.0
+------
+
+Additions:
+~~~~~~~~~~
+- Added the new Lavaloon & Electro Boots equipment to :class:`coc.EQUIPMENT`
+- Added :func:`coc.Client.get_equipment`
+- Added new Minion Prince hero to :class:`Hero`
+- Updated static data & enums for TH17
+- Added explicit cache control to every endpoint
+   - Use :attr:`coc.Client.lookup_cache` (default `True`) or pass it as a kwarg to API calling methods (default `None`) to control whether a lookup in the cache is performed. If `None`, it defaults to :attr:`client.lookup_cache`.
+   - Use :attr:`coc.Client.update_cache` to control whether the cache is updated after a request.
+   - Use :attr:`coc.Client.ignore_cached_errors` to specify status codes to ignore in the cache. For example, cached `404 Not Found` responses can be bypassed by setting `ignore_cached_errors=[404]`.
+- Moved `cls` functionality from `EventClient` to `Client` via :func:`coc.Client.set_object_cls`
+   - Previously, `cls` could only be set at the `EventClient` level and applied to every event automatically. Now, it can be set directly in the normal `Client` when initializing and can override the API call if needed. This eliminates the need to change `cls` for every individual API call.
+
+Bugs Fixed:
+~~~~~~~~~~~
+- Fixed a bug that would cause the first war of CWL to not appear while it was in prep & caused an index error appearing in output/logs
+- :func:`coc.Client.verify_player_token` requests are no longer cached
+
+v3.7.2
+------
+
+Additions:
+~~~~~~~~~~
+- Enable gzip and deflate encoding/compression
+
+v3.7.1
+------
+
+Additions:
+~~~~~~~~~~
+- Added the new Magic Mirror equipment to :class:`coc.EQUIPMENT`
+- updated static data
+
+Bugs Fixed:
+~~~~~~~~~~~
+- Fixed a bug that would cause coc.py to break if a request was sent with an empty string for a tag
+
+v3.7.0
+------
+
+Additions:
+~~~~~~~~~~
+- Added inheritance of classes into the docs to make it easier to see what classes inherit from others.
+- Added the new :class:`BattleModifier` to :attr:`ClanWar.battle_modifier` and :class:`ClanWarLogEntry.battle_modifier`.
+- Added the new troop and equipment in June 2024 update to the static data.
+
+Changes:
+~~~~~~~~
+- Changed the way the :class:`ClanWar` and :class:`ClanWarLogEntry` classes handles the :attr:`state` and :attr:`result`
+  attribute, respectively. It now returns a :class:`WarState`/:class:`WarResult` enumeration object instead of a string
+  to allow better type hinting and easier comparison.
+- Updated the static data to reflect the June 2024 update changes.
+
 v3.6.0
 ------
 
@@ -238,7 +355,7 @@ Additions:
 
 - Added :attr:`Client.raw_attribute` to control if the new `_raw_data` attribute of various objects gets populated
 
-- Added :ref:`full_war_api` as an extension
+- Added `full_war_api` as an extension
 
 - Added :func:`Client.login_with_tokens` offering the same functionality as :func:`Client.login_with_keys` as an asynchronous function
 

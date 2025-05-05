@@ -1,4 +1,4 @@
-import ujson
+import orjson
 
 from typing import Type, Dict, List
 from pathlib import Path
@@ -127,10 +127,10 @@ class SpellHolder(DataContainerHolder):
     data_object = Spell
 
     def _load_json(self, english_aliases, lab_to_townhall):
-        with open(SPELLS_FILE_PATH) as fp:
-            spell_data = ujson.load(fp)
-        with open(ARMY_LINK_ID_FILE_PATH) as fp:
-            army_link_ids = ujson.load(fp)
+        with open(SPELLS_FILE_PATH, 'rb') as fp:
+            spell_data = orjson.loads(fp.read())
+        with open(ARMY_LINK_ID_FILE_PATH, 'rb') as fp:
+            army_link_ids = orjson.loads(fp.read())
 
         id = 2000  # fallback ID for non-standard spells
         for supercell_name, spell_meta in spell_data.items():
@@ -139,15 +139,15 @@ class SpellHolder(DataContainerHolder):
                 continue
 
             # ignore deprecated content
-            if True in spell_meta.get("Deprecated", [False]):
+            if spell_meta.get("Deprecated") or  spell_meta.get("DisableProduction"):
                 continue
-            if True in spell_meta.get("DisableProduction", [False]):
-                continue
-            spell_name = english_aliases[spell_meta["TID"][0]]["EN"][0]
+
+            spell_name = english_aliases[spell_meta.get("TID")]
             new_spell: Type[Spell] = type('Spell', Spell.__bases__, dict(Spell.__dict__))
             spell_id = army_link_ids.get(spell_name, id)
-            if isinstance(spell_id, int):
+            if spell_id == id:
                 id += 1
+
             new_spell._load_json_meta(
                 spell_meta,
                 id=spell_id,
